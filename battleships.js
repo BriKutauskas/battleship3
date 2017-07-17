@@ -9,10 +9,10 @@ $(document).ready(function(){
     var split = $(this).attr('class').split("");
     var row = split[0];
     var column = split[1];
-    var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://soundbible.com/mp3/Depth%20Charge%20Short-SoundBible.com-1303947570.mp3');
-    var audioElementSplash = document.createElement('audio');
-    audioElementSplash.setAttribute('src',"http://soundbible.com/mp3/Video_Game_Splash-Ploor-699235037.mp3");
+    // var audioElement = document.createElement('audio');
+    // audioElement.setAttribute('src', 'http://soundbible.com/mp3/Depth%20Charge%20Short-SoundBible.com-1303947570.mp3');
+    // var audioElementSplash = document.createElement('audio');
+    // audioElementSplash.setAttribute('src',"http://soundbible.com/mp3/Video_Game_Splash-Ploor-699235037.mp3");
     console.log(split);
     //checks for a hit and changes color to red
     if (board[row][column] === 1) {
@@ -25,9 +25,10 @@ $(document).ready(function(){
       $("span").animate({opacity:1},"slow","linear",function(){
         $(this).animate({opacity:0},"slow");
       });
-      audioElement.play()
-      if(submarine === true){$("#sub").css("text-decoration", "line-through");}
-      hits++;
+      // audioElement.play()
+      if(submarine === true){
+        hits++;
+      }
       // $(this).addClass("hit");
       if (hits === 24){
         $("div").hide()
@@ -41,22 +42,24 @@ $(document).ready(function(){
       $(this).animate({
     color: "#00c0ff",
     backgroundColor: "blue"});
-    audioElementSplash.play()
-      if(torpedos == 0){
+    // audioElementSplash.play()
+      if(torpedos === 0){
         $("#torpedos").hide()
         $("#winLose").text("You lose!!");
         $(".shipLocation").css("border-color", "red");
         $("td").off("click");
       }
     }
-      $("#torpedos").text("Torpedos Remaining: " + torpedos--);
+      $("#torpedos").text("Torpedos Remaining: " + torpedos);
+      torpedos--;
+      console.log(torpedos);
   });
 });
 
 // This is the model
 // fucntion to makle the table 10 x 10
 var torpedos = 25;
-var hits = 0
+var hits = 0;
 var board = [[0], [0], [0], [0], [0], [0], [0], [0], [0], [0]];
 //array of different ship lengths
 const ships = [5, 4, 4, 3, 3, 2, 2, 1];
@@ -69,7 +72,7 @@ var destroyer;
 var destroyer2;
 var submarine;
 function tableLoop() {
-  var table = $("<table class='battleShits'> </table>");
+  var table = $("<table class='battles'> </table>");
   // loop to make rows
   for (i = 0; i < 10; i++) {
     var row = $("<tr></tr>").addClass([i]);
